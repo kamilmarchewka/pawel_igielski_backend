@@ -794,12 +794,14 @@ export interface ApiKategorieKategorie extends Schema.CollectionType {
     singularName: 'kategorie';
     pluralName: 'kategories';
     displayName: 'Kategorie';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
     nazwa_kategorii: Attribute.String;
+    slug: Attribute.UID<'api::kategorie.kategorie', 'nazwa_kategorii'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -869,6 +871,7 @@ export interface ApiSesjeSesje extends Schema.CollectionType {
     >;
     zdjecia: Attribute.Media<'images' | 'files' | 'videos' | 'audios', true>;
     Thumbnail: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    slug: Attribute.UID<'api::sesje.sesje', 'nazwa'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
