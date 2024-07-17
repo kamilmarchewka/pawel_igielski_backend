@@ -800,11 +800,6 @@ export interface ApiKategorieKategorie extends Schema.CollectionType {
   };
   attributes: {
     nazwa_kategorii: Attribute.String;
-    kategoria: Attribute.Relation<
-      'api::kategorie.kategorie',
-      'oneToOne',
-      'api::sesje.sesje'
-    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -860,6 +855,7 @@ export interface ApiSesjeSesje extends Schema.CollectionType {
     singularName: 'sesje';
     pluralName: 'sesjes';
     displayName: 'Sesje';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -872,6 +868,7 @@ export interface ApiSesjeSesje extends Schema.CollectionType {
       'api::kategorie.kategorie'
     >;
     zdjecia: Attribute.Media<'images' | 'files' | 'videos' | 'audios', true>;
+    Thumbnail: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

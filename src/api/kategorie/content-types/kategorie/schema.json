@@ -13,12 +13,6 @@
   "attributes": {
     "nazwa_kategorii": {
       "type": "string"
-    },
-    "kategoria": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::sesje.sesje",
-      "mappedBy": "sesja"
     }
   }
 }

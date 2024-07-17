@@ -4,7 +4,8 @@
   "info": {
     "singularName": "sesje",
     "pluralName": "sesjes",
-    "displayName": "Sesje"
+    "displayName": "Sesje",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -17,18 +18,29 @@
     "sesja": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::kategorie.kategorie",
-      "inversedBy": "kategoria"
+      "target": "api::kategorie.kategorie"
     },
     "zdjecia": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
+      ]
+    },
+    "Thumbnail": {
       "type": "media",
-      "multiple": true
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     }
   }
 }
