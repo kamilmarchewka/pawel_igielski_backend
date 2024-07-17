@@ -1,0 +1,34 @@
+{
+  "kind": "collectionType",
+  "collectionName": "sesjes",
+  "info": {
+    "singularName": "sesje",
+    "pluralName": "sesjes",
+    "displayName": "Sesje"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nazwa": {
+      "type": "string"
+    },
+    "sesja": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::kategorie.kategorie",
+      "inversedBy": "kategoria"
+    },
+    "zdjecia": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": true
+    }
+  }
+}

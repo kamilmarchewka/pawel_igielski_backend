@@ -362,37 +362,6 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiRestauracjeRestauracje extends Schema.CollectionType {
-  collectionName: 'restauracjes';
-  info: {
-    singularName: 'restauracje';
-    pluralName: 'restauracjes';
-    displayName: 'Restauracje';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Nazwa: Attribute.String;
-    Zdjecia: Attribute.Media<'images' | 'files' | 'videos' | 'audios', true>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::restauracje.restauracje',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::restauracje.restauracje',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -819,6 +788,108 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
+export interface ApiKategorieKategorie extends Schema.CollectionType {
+  collectionName: 'kategories';
+  info: {
+    singularName: 'kategorie';
+    pluralName: 'kategories';
+    displayName: 'Kategorie';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    nazwa_kategorii: Attribute.String;
+    kategoria: Attribute.Relation<
+      'api::kategorie.kategorie',
+      'oneToOne',
+      'api::sesje.sesje'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::kategorie.kategorie',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::kategorie.kategorie',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiRestauracjeRestauracje extends Schema.CollectionType {
+  collectionName: 'restauracjes';
+  info: {
+    singularName: 'restauracje';
+    pluralName: 'restauracjes';
+    displayName: 'Restauracje';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Nazwa: Attribute.String;
+    Zdjecia: Attribute.Media<'images' | 'files' | 'videos' | 'audios', true>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::restauracje.restauracje',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::restauracje.restauracje',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiSesjeSesje extends Schema.CollectionType {
+  collectionName: 'sesjes';
+  info: {
+    singularName: 'sesje';
+    pluralName: 'sesjes';
+    displayName: 'Sesje';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    nazwa: Attribute.String;
+    sesja: Attribute.Relation<
+      'api::sesje.sesje',
+      'oneToOne',
+      'api::kategorie.kategorie'
+    >;
+    zdjecia: Attribute.Media<'images' | 'files' | 'videos' | 'audios', true>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::sesje.sesje',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::sesje.sesje',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -829,7 +900,6 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::restauracje.restauracje': ApiRestauracjeRestauracje;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
@@ -838,6 +908,9 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
+      'api::kategorie.kategorie': ApiKategorieKategorie;
+      'api::restauracje.restauracje': ApiRestauracjeRestauracje;
+      'api::sesje.sesje': ApiSesjeSesje;
     }
   }
 }
