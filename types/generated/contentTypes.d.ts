@@ -788,6 +788,36 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
+export interface ApiHoteleHotele extends Schema.SingleType {
+  collectionName: 'hoteles';
+  info: {
+    singularName: 'hotele';
+    pluralName: 'hoteles';
+    displayName: 'Hotele';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    nazwa: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::hotele.hotele',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::hotele.hotele',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiKategorieKategorie extends Schema.CollectionType {
   collectionName: 'kategories';
   info: {
@@ -802,6 +832,11 @@ export interface ApiKategorieKategorie extends Schema.CollectionType {
   attributes: {
     nazwa_kategorii: Attribute.String;
     slug: Attribute.UID<'api::kategorie.kategorie', 'nazwa_kategorii'>;
+    Sesje: Attribute.Relation<
+      'api::kategorie.kategorie',
+      'oneToMany',
+      'api::sesje.sesje'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -813,37 +848,6 @@ export interface ApiKategorieKategorie extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::kategorie.kategorie',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiRestauracjeRestauracje extends Schema.CollectionType {
-  collectionName: 'restauracjes';
-  info: {
-    singularName: 'restauracje';
-    pluralName: 'restauracjes';
-    displayName: 'Restauracje';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Nazwa: Attribute.String;
-    Zdjecia: Attribute.Media<'images' | 'files' | 'videos' | 'audios', true>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::restauracje.restauracje',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::restauracje.restauracje',
       'oneToOne',
       'admin::user'
     > &
@@ -864,14 +868,14 @@ export interface ApiSesjeSesje extends Schema.CollectionType {
   };
   attributes: {
     nazwa: Attribute.String;
-    sesja: Attribute.Relation<
-      'api::sesje.sesje',
-      'oneToOne',
-      'api::kategorie.kategorie'
-    >;
     zdjecia: Attribute.Media<'images' | 'files' | 'videos' | 'audios', true>;
     Thumbnail: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     slug: Attribute.UID<'api::sesje.sesje', 'nazwa'>;
+    Kategoria: Attribute.Relation<
+      'api::sesje.sesje',
+      'manyToOne',
+      'api::kategorie.kategorie'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -908,8 +912,8 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
+      'api::hotele.hotele': ApiHoteleHotele;
       'api::kategorie.kategorie': ApiKategorieKategorie;
-      'api::restauracje.restauracje': ApiRestauracjeRestauracje;
       'api::sesje.sesje': ApiSesjeSesje;
     }
   }

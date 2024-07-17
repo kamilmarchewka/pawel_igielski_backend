@@ -15,11 +15,6 @@
     "nazwa": {
       "type": "string"
     },
-    "sesja": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::kategorie.kategorie"
-    },
     "zdjecia": {
       "type": "media",
       "multiple": true,
@@ -45,6 +40,12 @@
     "slug": {
       "type": "uid",
       "targetField": "nazwa"
+    },
+    "Kategoria": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::kategorie.kategorie",
+      "inversedBy": "Sesje"
     }
   }
 }

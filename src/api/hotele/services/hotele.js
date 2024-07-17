@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * restauracje service
+ * hotele service
  */
 
 const { createCoreService } = require('@strapi/strapi').factories;
 
-module.exports = createCoreService('api::restauracje.restauracje');
+module.exports = createCoreService('api::hotele.hotele');

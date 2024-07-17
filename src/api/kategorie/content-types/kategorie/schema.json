@@ -18,6 +18,12 @@
     "slug": {
       "type": "uid",
       "targetField": "nazwa_kategorii"
+    },
+    "Sesje": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::sesje.sesje",
+      "mappedBy": "Kategoria"
     }
   }
 }
