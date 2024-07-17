@@ -788,36 +788,6 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
-export interface ApiHoteleHotele extends Schema.SingleType {
-  collectionName: 'hoteles';
-  info: {
-    singularName: 'hotele';
-    pluralName: 'hoteles';
-    displayName: 'Hotele';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    nazwa: Attribute.String;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::hotele.hotele',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::hotele.hotele',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface ApiKategorieKategorie extends Schema.CollectionType {
   collectionName: 'kategories';
   info: {
@@ -912,7 +882,6 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
-      'api::hotele.hotele': ApiHoteleHotele;
       'api::kategorie.kategorie': ApiKategorieKategorie;
       'api::sesje.sesje': ApiSesjeSesje;
     }
